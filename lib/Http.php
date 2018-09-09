@@ -19,15 +19,6 @@ abstract class Http implements IRequest
 
     abstract public function create($token = '');
 
-   /* public function token($token = null){
-        if(Auth::user()) {
-            $this->token = Auth::user()->token();
-            return $this->token;
-        }
-        if($token) $this->token = $token;
-        return $this->token;
-    }*/
-
     public function params($data,$with = true){
         if(!empty($data) && $with){
             $this->params = array_merge($this->params,$data);
@@ -77,19 +68,6 @@ abstract class Http implements IRequest
         return $this->response(false);
     }
 
-    /*public function render($data = []){
-        return view($this->view,compact('data'));
-    }*/
-
-   /* public function __call($name, $arguments)
-    {
-        $url = $arguments[0];
-        $params = $arguments[1] ?? [];
-        $method = $arguments[2] ?? "post";
-
-        return $this->$method($url,$params);
-    }*/
-
     public function send(){
 
         try{
@@ -103,13 +81,9 @@ abstract class Http implements IRequest
                 $this->cookie
             );
 
-            //Log::info($method.":".$this->url.$this->uri,$this->params);
-
             $this->response = $response['result'];
             $this->cookie = $response['cookie'];
-        }catch (\Exception $ex){
-            //Log::error($ex->getMessage());
-        }
+        }catch (\Exception $ex){}
 
         return $this;
     }
