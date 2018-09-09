@@ -2,18 +2,18 @@
 
 trait WrapCurl
 {
-    public function get($url, $params,$header,$headerParams,$cookie)
+    public function get($url, $params,$header,$cookie)
     {
-        return $this->cSend($url,$params,'get',$header,$headerParams,$cookie);
+        return $this->send($url,$params,'get',$header,$cookie);
     }
 
-    public function post($url, $params,$header,$headerParams,$cookie)
+    public function post($url, $params,$header,$cookie)
     {
-        return $this->cSend($url,$params,'post',$header,$headerParams,$cookie);
+        return $this->send($url,$params,'post',$header,$cookie);
     }
 
-    private function cSend($url,$data,$method, $header = false,$headerPrams = [],$setCookie = null){
-        
+    private function send($url,$data,$method, $header = [], $setCookie = null){
+
         $ch = curl_init();
         if($method == 'get') {
             if(!empty($data)){

@@ -13,9 +13,8 @@ abstract class Http implements IRequest
     protected $params = [];
     private $token;
     private $response;
-    private $cookie = false;
-    private $header = false;
-    private $headerParams = [];
+    private $cookie = '';
+    private $header = [];
 
     abstract public function create($token = '');
 
@@ -30,14 +29,13 @@ abstract class Http implements IRequest
         return $this;
     }
 
-    public function cookie($cookie = false){
+    public function cookie($cookie){
         $this->cookie = $cookie;
         return $this;
     }
 
-    public function header($header = false,$params = []){
+    public function header($header){
         $this->header = $header;
-        $this->headerParams = $params;
         return $this;
     }
 
@@ -77,7 +75,6 @@ abstract class Http implements IRequest
                 $this->url.$this->uri,
                 $this->params,
                 $this->header,
-                $this->headerParams,
                 $this->cookie
             );
         }catch (\Exception $ex){}
