@@ -73,16 +73,13 @@ abstract class Http implements IRequest
         try{
             $method = strtolower($this->method);
 
-            $response = $this->$method(
+            $this->response = $this->$method(
                 $this->url.$this->uri,
                 $this->params,
                 $this->header,
                 $this->headerParams,
                 $this->cookie
             );
-
-            $this->response = $response['result'];
-            $this->cookie = $response['cookie'];
         }catch (\Exception $ex){}
 
         return $this;
